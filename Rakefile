@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'rake'
+
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
@@ -9,6 +12,7 @@ begin
     gemspec.homepage = "http://github.com/jh3/drupal-deploy"
     gemspec.authors = ["Joe Hassick"]
   end
+	Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
