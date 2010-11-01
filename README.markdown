@@ -3,6 +3,8 @@
 If you want a way to deploy your drupal code, copy `files/` directory (and back it up), and dump and 
 import your development database to another server (and back it up!) all by with 'cap deploy', this is for you.
 
+Please visit the [wiki](http://github.com/jh3/drupal-deploy/wiki) for a couple of example files!
+
 ## Installation
 
     $ gem install drupal-deploy
