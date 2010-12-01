@@ -7,7 +7,7 @@ Please visit the [wiki](http://github.com/jh3/drupal-deploy/wiki) for a couple o
 
 ## Installation
 
-    $ gem install drupal-deploy
+$ gem install drupal-deploy
 
 ## Dependencies
 
@@ -17,9 +17,9 @@ Please visit the [wiki](http://github.com/jh3/drupal-deploy/wiki) for a couple o
 
 Begin your application's `Capfile` like this:
 
-    require 'rubygems'
-    require 'drupal-deploy'
-    load    'config/deploy'
+require 'rubygems'
+require 'drupal-deploy'
+load    'config/deploy'
 
 Be sure to remove the original `require 'deploy'` as this is where the standard tasks are defined.  You don't want to use those.
 
@@ -37,41 +37,41 @@ This deploy strategy makes a bunch of assumptions which you may or may not like:
 
 Your site's directory structure should resemble this:
 
-		my_website/
-		`- .git/
-		`- .gitignore
-		`- Capfile
-		`- config/
-			`- deploy.rb
-			`- deploy/
-				`- staging.rb
-				`- production.rb
-		`- drupal/
-			`- <drupal files>
+    my_website/
+    `- .git/
+    `- .gitignore
+    `- Capfile
+    `- config/
+      `- deploy.rb
+      `- deploy/
+        `- staging.rb
+        `- production.rb
+    `- drupal/
+      `- <drupal files>
 
 ## What's Included?
 
 If you want to try before you buy, here's the list of tasks included with this version of the deploy recipe:
 
-		cap deploy                    # Deploys your project.
-		cap deploy:check              # Test deployment dependencies.
-		cap deploy:cleanup            # Clean up old releases.
-		cap deploy:db                 # Dumps and imports the development database to your live site
-		cap deploy:db:pull            # Dumps and imports the live database to the development site
-		cap deploy:files              # Copies the files directory from development to live
-		cap deploy:files:pull         # Pull the files directory from the live server to development
-		cap deploy:pending            # Displays the commits since your last deploy.
-		cap deploy:pending:diff       # Displays the `diff' since your last deploy.
-		cap deploy:pull               # Pull the database and files directory from your primary server to your secondary server
-		cap deploy:rollback           # Rolls back to a previous version and restarts.
-		cap deploy:setup              # Prepares one or more servers for deployment.
-		cap deploy:update             # Copies your project and updates the symlink.
-		cap deploy:update_code        # Copies your project to the remote servers.
-		cap deploy:upload             # Copy files to the currently deployed version.
-		cap drupal:configure:settings # Copy the appropriate settings.php file.
-		cap drupal:symlink:webapp     # Symlink the website
-		cap invoke                    # Invoke a single command on the remote servers.
-		cap shell                     # Begin an interactive Capistrano session.
+    cap deploy                    # Deploys your project.
+    cap deploy:check              # Test deployment dependencies.
+    cap deploy:cleanup            # Clean up old releases.
+    cap deploy:db                 # Dumps and imports the development database to your live site
+    cap deploy:db:pull            # Dumps and imports the live database to the development site
+    cap deploy:files              # Copies the files directory from development to live
+    cap deploy:files:pull         # Pull the files directory from the live server to development
+    cap deploy:pending            # Displays the commits since your last deploy.
+    cap deploy:pending:diff       # Displays the `diff' since your last deploy.
+    cap deploy:pull               # Pull the database and files directory from your primary server to your secondary server
+    cap deploy:rollback           # Rolls back to a previous version and restarts.
+    cap deploy:setup              # Prepares one or more servers for deployment.
+    cap deploy:update             # Copies your project and updates the symlink.
+    cap deploy:update_code        # Copies your project to the remote servers.
+    cap deploy:upload             # Copy files to the currently deployed version.
+    cap drupal:configure:settings # Copy the appropriate settings.php file.
+    cap drupal:symlink:webapp     # Symlink the website
+    cap invoke                    # Invoke a single command on the remote servers.
+    cap shell                     # Begin an interactive Capistrano session.
 
 I recommend running `cap -vT` too and looking through everything.  There are a bunch of internal tasks at work.
 
