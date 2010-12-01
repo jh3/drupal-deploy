@@ -50,8 +50,8 @@ Capistrano::Configuration.instance(:must_exist).load do
 
   _cset(:releases_path)     { File.join(deploy_to, version_dir) }
   _cset(:shared_path)       { File.join(deploy_to, shared_dir) }
-  _cset(:databases_path)		{ File.join(deploy_to, shared_dir, shared_children[0]) }
-  _cset(:files_path)				{ File.join(deploy_to, shared_dir, shared_children[1]) }
+  _cset(:databases_path)    { File.join(deploy_to, shared_dir, shared_children[0]) }
+  _cset(:files_path)        { File.join(deploy_to, shared_dir, shared_children[1]) }
   _cset(:files_backup_path) { File.join(deploy_to, shared_dir, shared_children[2]) }
   _cset(:current_path)      { File.join(deploy_to, current_dir) }
   _cset(:release_path)      { File.join(releases_path, release_name) }
@@ -66,7 +66,7 @@ Capistrano::Configuration.instance(:must_exist).load do
 
   _cset(:previous_release)  { releases.length > 1 ? File.join(releases_path, releases[-2]) : nil }
   _cset(:previous_database) { databases.length > 1 ? File.join(databases_path, databases[-2]) : nil }
-  _cset(:previous_files)		{ files_backup.length > 1 ? File.join(files_backup_path, files_backup[-2]) : nil }
+  _cset(:previous_files)    { files_backup.length > 1 ? File.join(files_backup_path, files_backup[-2]) : nil }
 
   _cset(:current_revision)  { capture("cat #{current_path}/REVISION").chomp }
   _cset(:latest_revision)   { capture("cat #{current_release}/REVISION").chomp }
@@ -82,7 +82,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   _cset(:latest_release) { exists?(:deploy_timestamped) ? release_path : current_release }
 
   # This assumes that drupal lives in its own directory named 'drupal'
-  _cset(:drupal_root)		 { File.join(current_release, 'drupal') }
+  _cset(:drupal_root)    { File.join(current_release, 'drupal') }
 
   # =========================================================================
   # These are helper methods that will be available to your recipes.
@@ -251,7 +251,7 @@ Capistrano::Configuration.instance(:must_exist).load do
         desc <<-DESC
           [internal] Compresses the files directory located on your primary web \
           server and sends it to your secondary web server.  You asked twice \
-          before it actually removes/overrides anything, just in case.  
+          before it actually removes/overrides anything, just in case.
 
           If this task is aborted after the 'compress' tasks executes, the \
           archive is deleted.
@@ -260,7 +260,7 @@ Capistrano::Configuration.instance(:must_exist).load do
           run 'files:pull'.
         DESC
         task :paranoid_execute, :except => { :no_release => true } do
-          filename 
+          filename
           Capistrano::CLI.ui.say("You are about to pull the files directory from #{stage} and send it to your development server.")
           answer = Capistrano::CLI.ui.ask("Are you sure you want to do this? (y[es]/n[o]): ")
           answer = answer.match(/(^y(es)?$)/i)
@@ -289,7 +289,7 @@ Capistrano::Configuration.instance(:must_exist).load do
           let 'paranoid_execute' run this.
         DESC
         task :compress, :roles => :web, :only => { :primary => true } do
-          filename 
+          filename
           execute = []
           execute << "cd #{shared_path}"
           execute << "tar cjf #{tmp_filename} files/"
@@ -308,7 +308,7 @@ Capistrano::Configuration.instance(:must_exist).load do
           execute = []
           execute << "#{try_sudo} rm -rf #{application_wd}/sites/default/files"
           execute << "#{try_sudo} tar xjf #{tmp_filename} -C #{application_wd}/sites/default"
-          execute << "#{try_sudo} rm #{tmp_filename}" 
+          execute << "#{try_sudo} rm #{tmp_filename}"
           run execute.join(" && ")
         end
 
@@ -320,7 +320,7 @@ Capistrano::Configuration.instance(:must_exist).load do
         task :rollback, :roles => :web, :only => { :secondary => true } do
           filename
           try_sudo "rm #{tmp_filename}"
-          abort "Files directory pull was aborted before decompressing the archive.  The archive has been removed." 
+          abort "Files directory pull was aborted before decompressing the archive.  The archive has been removed."
         end
 
         desc "Pull the files directory from the live server to development"
@@ -333,8 +333,8 @@ Capistrano::Configuration.instance(:must_exist).load do
       task :set_file_paths, :except => { :no_release => true } do
         tmpdir = '/tmp'
 
-        set(:files_dir)				{ File.join(application_wd, 'sites/default') }
-        set(:filename)				{ File.join(tmpdir, "#{file_archive_name}.bz2") }
+        set(:files_dir)       { File.join(application_wd, 'sites/default') }
+        set(:filename)        { File.join(tmpdir, "#{file_archive_name}.bz2") }
         set(:remote_filename) { File.join(tmpdir, File.basename(filename)) }
       end
 
@@ -356,7 +356,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       desc <<-DESC
         [internal] Removes the existing files directory on the primary server and \
         unpacks the compressed files archive.  The compressed archive is saved \
-        in 'shared/files_backup'.  
+        in 'shared/files_backup'.
 
         In case of an error, the process is rolled back and the previous files \
         archive is restored.  Do not call this task directly.
@@ -370,7 +370,7 @@ Capistrano::Configuration.instance(:must_exist).load do
           end
         end
 
-        set_file_paths	
+        set_file_paths
 
         execute = []
         execute << "#{try_sudo} rm -rf #{files_path}"
@@ -509,7 +509,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       desc <<-DESC
         [internal] Clears the cache on the development site, dumps the database, \
         and compresses it for storage.  All of the database snapshots sit in \
-        shared/dumps. 
+        shared/dumps.
 
         It is assumed you have drush installed on your remote server.
 
