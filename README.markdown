@@ -7,7 +7,7 @@ Please visit the [wiki](http://github.com/jh3/drupal-deploy/wiki) for a couple o
 
 ## Installation
 
-$ gem install drupal-deploy
+    $ gem install drupal-deploy
 
 ## Dependencies
 
@@ -17,9 +17,9 @@ $ gem install drupal-deploy
 
 Begin your application's `Capfile` like this:
 
-require 'rubygems'
-require 'drupal-deploy'
-load    'config/deploy'
+    require 'rubygems'
+    require 'drupal-deploy'
+    load    'config/deploy'
 
 Be sure to remove the original `require 'deploy'` as this is where the standard tasks are defined.  You don't want to use those.
 
